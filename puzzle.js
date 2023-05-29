@@ -13,7 +13,7 @@ var cols,
   tiles,
   boardHeight;
 
-  /////////create board/////////////
+/////////create board/////////////
 function initBoardSize() {
   if (boardWidth > windowWidth) {
     boardWidth = windowWidth;
@@ -61,7 +61,7 @@ function initialize() {
   tiles = document.getElementsByClassName("tile-item");
 
   tilesEventHandler();
-  isSolvable()
+  isSolvable();
 }
 
 initialize();
@@ -186,20 +186,45 @@ function changeTileSizeSubmit() {
   initBoardSize();
 }
 
-function isSolvable(){
-  console.log(coordinates)
+function isSolvable() {
   var n = cols;
-  var orders =[];
- for(var i=1;i<=rows;i++){
- for(var j=1;j<=rows;j++)
-console.log(coordinates.indexOf({x:1,y:1}))
- }
-  console.log(orders)
-  if(n%2 == 0){
-      console.log("n is even")
+  var orders = [];
+  var parity =0;
+  var blankRow  = (rows - coordinates[coordinates.length-1].y)+1;
+  for (var i = 1; i <= rows; i++) {
+    for (var j = 1; j <= rows; j++)
+   {
+    var index = (coordinates.findIndex(item => item.x == j && item.y == i ))+1;
+    if (index == coordinates.length ){
+      index = 0
+    }
+      orders.push(index)
+   }
   }
-else{
-  console.log("n is odd")
-
-}
+  for (var i = 0; i < orders.length; i++){
+    for (var j = i + 1; j < orders.length; j++){
+      if (orders[i] > orders[j] && orders[j] != 0)
+      {
+          parity++;
+      }
+    }
+  }
+  if (n % 2 == 0 && blankRow % 2 == 0 && blankRow != 0 && parity % 2 != 0) {
+       document.getElementById("message").innerHTML = "This puzzle is solvable !";
+       setTimeout(function(){
+        document.getElementById("message").innerHTML =""
+       },5000)
+  } else if(n % 2 != 0 && parity % 2 == 0) {
+      document.getElementById("message").innerHTML = "This puzzle is solvable !";
+      setTimeout(function(){
+       document.getElementById("message").innerHTML =""
+      },5000)
+  }
+  else{
+    document.getElementById("message").innerHTML = "This puzzle is not solvable !";
+    setTimeout(function(){
+     document.getElementById("message").innerHTML ="";
+    initialize()
+    },2000)
+  }
 }
