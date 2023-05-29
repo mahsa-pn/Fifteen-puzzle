@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>15 Puzzle</title>
+    <link rel="stylesheet" href="./puzzle.css">
+</head>
+<body>
+    <div class="filters">
+        <div class="form-group">
+            <label for="">Board size :</label>
+            <input type="number" class="" placeholder="Min" min="4" value="4" onchange="changeBoardSize()" onkeyup="changeBoardSize()" id="board-size">
+            <button class="btn" onclick="initialize()">Submit</button>
+        </div>
+        <div class="form-group">
+            <label for="">Tile size :</label>
+            <input type="number" class="" placeholder="Min" min="1" onchange="changeTileSize()" onkeyup="changeTileSize()" id="tile-size">
+            <button class="btn" onclick="changeTileSizeSubmit()">Submit</button>
+        </div>
+    </div>
+
+    <button class="shuffle-btn btn" onclick="initialize()">Shuffle</button>
+    <div id="puzzle-box">
+    </div>
+
+    <!-- <button class="add-btn btn" onclick="">Add new board</button> -->
+    <script src="./puzzle.js"></script>
+</body>
+</html>
